@@ -2,8 +2,6 @@
 
 namespace Ardiansyahirwan\FilamentRolePermission;
 
-use Ardiansyahirwan\FilamentRolePermission\Database\Seeders\CustomRoleSeeder;
-use Ardiansyahirwan\FilamentRolePermission\Database\Seeders\CustomPermissionSeeder;
 use Illuminate\Support\ServiceProvider;
 use Spatie\Permission\PermissionServiceProvider;
 use Filament\Facades\Filament;
@@ -23,12 +21,16 @@ class CustomPermissionServiceProvider extends ServiceProvider
 
    public function boot()
    {
-      // Boot any application services.
-      // Here you can perform actions after all services have been registered.
-
       // Ensure the PermissionServiceProvider is registered.
-      $this->app->register(PermissionServiceProvider::class);
+      if ($this->app->register(PermissionServiceProvider::class)) {
+         // Publish configuration file
+         $this->publishes([
+            __DIR__ . '/../config/filament-custom-role-permission.php' => config_path('filament-custom-role-permission.php'),
+         ], 'config');
 
+         // call seeder with artisan db:seed
+         $this->callSeeder();
+      }
       // Example: Add custom Filament resources
       Filament::serving(function () {
          Filament::registerNavigationItems([
@@ -37,28 +39,30 @@ class CustomPermissionServiceProvider extends ServiceProvider
                ->icon('heroicon-o-shield-check'),
          ]);
       });
-
-      // Publish configuration file
-      $this->publishes([
-         __DIR__ . '/../config/filament-custom-role-permission.php' => config_path('filament-custom-role-permission.php'),
-      ], 'config');
-
-      // call seeder with artisan db:seed
-      $this->callSeeder();
    }
 
    protected function callSeeder()
    {
       if ($this->app->runningInConsole()) {
+         $this->publishPermission();
          $this->loadSeeder();
       }
+   }
+
+   protected function publishPermission()
+   {
+      Artisan::call('vendor:publish', [
+         '--provider' => "Spatie\\Permission\\PermissionServiceProvider",
+      ]);
    }
 
    protected function loadSeeder()
    {
       Artisan::call('db:seed', [
-         '--class' => CustomPermissionSeeder::class,
-         '--class' => CustomRoleSeeder::class,
+         '--class' => "Ardiansyahirwan\\FilamentRolePermission\\Database\\Seeders\\CustomRoleSeeder",
+      ]);
+      Artisan::call('db:seed', [
+         '--class' => "Ardiansyahirwan\\FilamentRolePermission\\Database\\Seeders\\CustomPermissionSeeder",
       ]);
    }
 }
