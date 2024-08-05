@@ -2,7 +2,8 @@
 
 namespace Ardiansyahirwan\FilamentRolePermission;
 
-use Ardiansyahirwan\FilamentCustomRolePermission\Database\Seeders\CustomPermissionSeeder;
+use Ardiansyahirwan\FilamentRolePermission\Database\Seeders\CustomRoleSeeder;
+use Ardiansyahirwan\FilamentRolePermission\Database\Seeders\CustomPermissionSeeder;
 use Illuminate\Support\ServiceProvider;
 use Spatie\Permission\PermissionServiceProvider;
 use Filament\Facades\Filament;
@@ -57,6 +58,7 @@ class CustomPermissionServiceProvider extends ServiceProvider
    {
       Artisan::call('db:seed', [
          '--class' => CustomPermissionSeeder::class,
+         '--class' => CustomRoleSeeder::class,
       ]);
    }
 }
