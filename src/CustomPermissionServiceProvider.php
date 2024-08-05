@@ -1,6 +1,6 @@
 <?php
 
-namespace Ardiansyahirwan\FilamentRolePermission;
+namespace Ardiansyahirwan\FilamentRolePermission\Database\Seeders;
 
 use Illuminate\Support\ServiceProvider;
 use Spatie\Permission\PermissionServiceProvider;
@@ -22,15 +22,15 @@ class CustomPermissionServiceProvider extends ServiceProvider
    public function boot()
    {
       // Ensure the PermissionServiceProvider is registered.
-      if ($this->app->register(PermissionServiceProvider::class)) {
-         // Publish configuration file
-         $this->publishes([
-            __DIR__ . '/../config/filament-custom-role-permission.php' => config_path('filament-custom-role-permission.php'),
-         ], 'config');
+      $this->app->register(PermissionServiceProvider::class);
+      // Publish configuration file
+      $this->publishes([
+         __DIR__ . '/../config/filament-custom-role-permission.php' => config_path('filament-custom-role-permission.php'),
+      ], 'config');
 
-         // call seeder with artisan db:seed
-         $this->callSeeder();
-      }
+      // call seeder with artisan db:seed
+      $this->callSeeder();
+
       // Example: Add custom Filament resources
       Filament::serving(function () {
          Filament::registerNavigationItems([
@@ -59,10 +59,11 @@ class CustomPermissionServiceProvider extends ServiceProvider
    protected function loadSeeder()
    {
       Artisan::call('db:seed', [
-         '--class' => CustomRoleSeeder::class,
+         '--class' => "Ardiansyahirwan\\FilamentRolePermission\\Database\\Seeders\\CustomRoleSeeder",
       ]);
+
       Artisan::call('db:seed', [
-         '--class' => CustomPermissionSeeder::class,
+         '--class' => "Ardiansyahirwan\\FilamentRolePermission\\Database\\Seeders\\CustomPermissionSeeder",
       ]);
    }
 }
