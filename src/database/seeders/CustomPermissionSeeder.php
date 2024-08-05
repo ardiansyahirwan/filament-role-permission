@@ -1,6 +1,6 @@
 <?php
 
-namespace Ardiansyahirwan\FilamentRolePermission\Src\Database\Seeders;
+namespace Ardiansyahirwan\FilamentRolePermission\Seeders;
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
