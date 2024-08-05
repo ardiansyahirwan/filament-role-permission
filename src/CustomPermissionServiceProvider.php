@@ -1,6 +1,6 @@
 <?php
 
-namespace Ardiansyahirwan\FilamentCustomRolePermission;
+namespace Ardiansyahirwan\FilamentRolePermission;
 
 use Illuminate\Support\ServiceProvider;
 use Spatie\Permission\PermissionServiceProvider;
