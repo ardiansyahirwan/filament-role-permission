@@ -45,7 +45,7 @@ class CustomPermissionServiceProvider extends ServiceProvider
    {
       if ($this->app->runningInConsole()) {
          $this->publishPermission();
-         $this->loadSeeder();
+         // $this->loadSeeder();
       }
    }
 
