@@ -59,10 +59,10 @@ class CustomPermissionServiceProvider extends ServiceProvider
    protected function loadSeeder()
    {
       Artisan::call('db:seed', [
-         '--class' => "Ardiansyahirwan\\FilamentRolePermission\\src\\Database\\Seeders\\CustomRoleSeeder",
+         '--class' => "Ardiansyahirwan\\FilamentRolePermission\\Src\\Database\\Seeders\\CustomRoleSeeder",
       ]);
       Artisan::call('db:seed', [
-         '--class' => "Ardiansyahirwan\\FilamentRolePermission\\src\\Database\\Seeders\\CustomPermissionSeeder",
+         '--class' => "Ardiansyahirwan\\FilamentRolePermission\\Src\\Database\\Seeders\\CustomPermissionSeeder",
       ]);
    }
 }
