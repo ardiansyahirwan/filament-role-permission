@@ -2,6 +2,7 @@
 
 namespace Ardiansyahirwan\FilamentRolePermission;
 
+use Ardiansyahirwan\FilamentCustomRolePermission\Database\Seeders\CustomPermissionSeeder;
 use Illuminate\Support\ServiceProvider;
 use Spatie\Permission\PermissionServiceProvider;
 use Filament\Facades\Filament;
@@ -55,7 +56,7 @@ class CustomPermissionServiceProvider extends ServiceProvider
    protected function loadSeeder()
    {
       Artisan::call('db:seed', [
-         '--class' => 'Ardiansyahirwan\\FilamentRolePermission\\src\\Database\\Seeders\\CustomPermissionSeeder',
+         '--class' => CustomPermissionSeeder::class,
       ]);
    }
 }
