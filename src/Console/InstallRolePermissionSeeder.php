@@ -13,7 +13,7 @@ class InstallRolePermissionSeeder extends Command
     *
     * @var string
     */
-   protected $signature = 'ardiansyah:seed';
+   protected $signature = 'db:seed customseed';
 
    /**
     * The console command description.
