@@ -15,8 +15,8 @@ class CustomPermissionServiceProvider extends ServiceProvider
    {
       // Register any application services.
       $this->mergeConfigFrom(
-         __DIR__ . '/../config/filament-custom-role-permission.php',
-         'filament-custom-role-permission'
+         __DIR__ . '/../config/custompermission.php',
+         'custompermission'
       );
    }
 
@@ -24,7 +24,7 @@ class CustomPermissionServiceProvider extends ServiceProvider
    {
       // Publish configuration file
       $this->publishes([
-         __DIR__ . '/../config/filament-custom-role-permission.php' => config_path('filament-custom-role-permission.php'),
+         __DIR__ . '/../config/custompermission.php' => config_path('custompermission.php'),
       ], 'config');
 
       if ($this->app->runningInConsole()) {
