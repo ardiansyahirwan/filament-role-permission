@@ -9,7 +9,7 @@ class CustomPermissionSeeder extends Seeder
 {
    public function run(): void
    {
-      $permissionsOfArray = config('filament-custom-role-permission.permissions');
+      $permissionsOfArray = config('custompermission.permissions');
 
       $permissions = collect($permissionsOfArray)
          ->map(fn ($permission) => ['name' => $permission, 'guard_name' => 'web']);

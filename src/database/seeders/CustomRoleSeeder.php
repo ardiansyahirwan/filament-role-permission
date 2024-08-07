@@ -9,7 +9,7 @@ class CustomRoleSeeder extends Seeder
 {
    public function run(): void
    {
-      $arrayRoles = config('filament-custom-role-permission.roles');
+      $arrayRoles = config('custompermission.roles');
       $roles = collect($arrayRoles)->map(function ($role) {
          return ['name' => $role, 'guard_name' => 'web'];
       });
