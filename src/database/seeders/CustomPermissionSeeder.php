@@ -9,17 +9,7 @@ class CustomPermissionSeeder extends Seeder
 {
    public function run(): void
    {
-      $permissionsOfArray = [
-         'create stadions',
-         'edit stadions',
-         'delete stadions',
-         'create teams',
-         'edit teams',
-         'delete teams',
-         'create match teams',
-         'edit match teams',
-         'delete match teams',
-      ];
+      $permissionsOfArray = config('filament-custom-role-permission.permissions');
 
       $permissions = collect($permissionsOfArray)
          ->map(fn ($permission) => ['name' => $permission, 'guard_name' => 'web']);
