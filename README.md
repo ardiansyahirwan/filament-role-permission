@@ -58,6 +58,11 @@ return [
 ];
 ```
 
+and last add on your ``app/Models/User.php``
+```php
+use HasRoles ;
+```
+
 ## Uninstall Package
 Just because this package depends on ```spatie/laravel-permission``` make sure that you clean up your project from published file from ```spatie/laravel-permission```
 
