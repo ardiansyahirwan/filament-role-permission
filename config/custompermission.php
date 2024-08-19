@@ -3,17 +3,20 @@ return [
    /**
     * List of roles on Application
     */
-   'roles' => ['super_admin', 'admin', 'user'],
+   'roles' => ['admin', 'user'],
 
    /**
     * List of Permission on Application
     */
    'permissions' => [
       'create role',
-      'edit role',
+      'update role',
       'delete role',
       'create permission',
-      'edit permission',
+      'update permission',
       'delete permission',
+      'create user',
+      'update user',
+      'delete user',
    ],
 ];

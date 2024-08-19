@@ -5,11 +5,11 @@
   - [Installation](#installation-1)
   - [Uninstall Package](#uninstall-package)
 - [Migration File](#migration-file)
+- [Policies File](#policies-file)
 - [Testing Package](#testing-package)
   - [getEnvirontmentSetUp()](#getenvirontmentsetup)
     - [Test database use getEnvirontmentSetUp()](#test-database-use-getenvirontmentsetup)
   - [Testing Variable](#testing-variable)
-- [Policies File](#policies-file)
 
 # Installation
 this project run base on :
@@ -111,8 +111,8 @@ $role = Role::create(['name' => 'Super-Admin']);
 
 // create user Super-Admin
 $user = \App\Models\User::factory()->create([
-            'name' => 'User',
-            'email' => 'user@email.com',
+            'name' => 'Super Admin',
+            'email' => 'superadmin@email.com',
         ]);
 $user->assignRole($role);
 ```
@@ -136,6 +136,12 @@ public function boot():void
         }
     });
 }
+```
+
+# Policies File
+for getting policies file run this command:
+```bash
+php artisan vendor:publish --tag="policies"
 ```
 
 # Testing Package
@@ -323,10 +329,4 @@ class EnvVariableTest extends TestCase
     }
 }
 
-```
-
-# Policies File
-for getting policies file run this command:
-```bash
-php artisan vendor:publish --tag="policies"
 ```
