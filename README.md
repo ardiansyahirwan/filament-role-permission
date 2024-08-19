@@ -9,6 +9,7 @@
   - [getEnvirontmentSetUp()](#getenvirontmentsetup)
     - [Test database use getEnvirontmentSetUp()](#test-database-use-getenvirontmentsetup)
   - [Testing Variable](#testing-variable)
+- [Policies File](#policies-file)
 
 # Installation
 this project run base on :
@@ -99,6 +100,42 @@ php artisan migrate
 And then run
 ```bash
 php artisan db:customseed
+```
+
+before you run the seeder, lets make user as 'Super-Admin'. copy this to your ``app/database/seeder/DatabaseSeeder.php``
+```php
+// Role as Super Admin
+$role = Role::create(['name' => 'Super-Admin']);
+
+// gets all permissions via Gate::before rule; see AuthServiceProvider
+
+// create user Super-Admin
+$user = \App\Models\User::factory()->create([
+            'name' => 'User',
+            'email' => 'user@email.com',
+        ]);
+$user->assignRole($role);
+```
+run :
+```bash
+php artisan db:seed
+```
+and last, in your ``app/provider/AppServiceProvider`` copy this code:
+```php
+public function boot():void
+{
+    /**Unguard model for filament */
+    Model::unguard();
+
+    /**
+     * Super-Admin grant all authorize
+     */
+    Gate::before(function ($user, $ability) {
+        if ($user->hasRole('Super-Admin')) {
+        return true;
+        }
+    });
+}
 ```
 
 # Testing Package
@@ -286,4 +323,10 @@ class EnvVariableTest extends TestCase
     }
 }
 
+```
+
+# Policies File
+for getting policies file run this command:
+```bash
+php artisan vendor:publish --tag="policies"
 ```
