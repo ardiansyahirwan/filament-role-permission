@@ -14,7 +14,6 @@
 # Installation
 this project run base on :
 - Spatie/Laravel Permission
-- Filament and Dependancy
 - Laravel of course
 ## Prerequisite
 Copy this syntax on your ```composer.json``` file project.
@@ -35,8 +34,12 @@ Copy this syntax on your ```composer.json``` file project.
     ],
 ```
 ## Installation
-Make sure you have done with [Prerequisite](#prerequisite) section, after that you can go with installation package.<br>
-First you can start with 
+Make sure you have done with [Prerequisite](#prerequisite) section, and you've to install filament on [filament.com](https://filamentphp.com/docs/3.x/panels/installation). After that you can go with installation package.<br>
+First you can start with
+```bash
+composer require filament/filament:"^3.2" -W
+```
+and then :
 ```bash
 composer update
 ```
