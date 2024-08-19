@@ -21,8 +21,7 @@ class CustomPermissionServiceProvider extends ServiceProvider
 
    public function register()
    {
-
-      // Register any application services.
+      /*Register any application services.*/
       $this->mergeConfigFrom(
          __DIR__ . '/../config/custompermission.php',
          'custompermission'
@@ -31,12 +30,17 @@ class CustomPermissionServiceProvider extends ServiceProvider
 
    public function boot()
    {
-      // Publish Policies File
+      /*Publish Filament cluster File*/
+      $this->loadViewsFrom(__DIR__ . '/../src/Filament', 'filament');
+      $this->publishes([__DIR__ . '/../src/Filament' => app_path('Filament')], 'filament-cluster');
+
+      /*Publish Policies File*/
       $this->registerPolicies();
       $this->publishes([
          __DIR__ . '/../src/Policies' => app_path('Policies'),
       ], 'policies');
-      // Publish configuration file
+
+      /*Publish configuration file*/
       $this->publishes([
          __DIR__ . '/../config/custompermission.php' => config_path('custompermission.php'),
       ], 'config');
