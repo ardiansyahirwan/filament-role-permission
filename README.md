@@ -6,6 +6,7 @@
   - [Uninstall Package](#uninstall-package)
 - [Migration File](#migration-file)
 - [Policies File](#policies-file)
+- [Cluster File](#cluster-file)
 - [Testing Package](#testing-package)
   - [getEnvirontmentSetUp()](#getenvirontmentsetup)
     - [Test database use getEnvirontmentSetUp()](#test-database-use-getenvirontmentsetup)
@@ -145,6 +146,12 @@ public function boot():void
 for getting policies file run this command:
 ```bash
 php artisan vendor:publish --tag="policies"
+```
+
+# Cluster File
+for getting Filament Cluster file run this command:
+```bash
+php artisan vendor:publish --tag="filament-cluster"
 ```
 
 # Testing Package
