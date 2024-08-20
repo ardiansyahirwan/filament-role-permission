@@ -5,6 +5,7 @@
   - [Installation](#installation-1)
   - [Uninstall Package](#uninstall-package)
 - [Migration File](#migration-file)
+- [Admin Panel](#admin-panel)
 - [Policies File](#policies-file)
 - [Cluster File](#cluster-file)
 - [Testing Package](#testing-package)
@@ -16,6 +17,9 @@
 this project run base on :
 - Spatie/Laravel Permission
 - Laravel of course
+<br/>
+<br/>
+
 ## Prerequisite
 Copy this syntax on your ```composer.json``` file project.
 ```json
@@ -34,6 +38,9 @@ Copy this syntax on your ```composer.json``` file project.
         }
     ],
 ```
+<br/>
+<br/>
+
 ## Installation
 Make sure you have done with [Prerequisite](#prerequisite) section, and you've to install filament on [filament.com](https://filamentphp.com/docs/3.x/panels/installation). After that you can go with installation package.<br>
 First you can start with
@@ -68,6 +75,10 @@ and last add on your ``app/Models/User.php``
 use HasRoles ;
 ```
 
+Next to **[Migration File](#migration-file)**  for run and setting the **[migration](#migration-file)**
+<br/>
+<br/>
+
 ## Uninstall Package
 Just because this package depends on ```spatie/laravel-permission``` make sure that you clean up your project from published file from ```spatie/laravel-permission```
 
@@ -94,6 +105,8 @@ return [
 ```
 
 and then on folder ```database/migration``` delete **create_permission_table.php**
+<br/>
+<br/>
 
 # Migration File
 you must set database connection of your Laravel project. Before run the migration file, make sure you have done with [Installation](#installation-1) section.
@@ -124,7 +137,7 @@ run :
 ```bash
 php artisan db:seed
 ```
-and last, in your ``app/provider/AppServiceProvider`` copy this code:
+In your ``app/provider/AppServiceProvider`` copy this code:
 ```php
 public function boot():void
 {
@@ -141,18 +154,53 @@ public function boot():void
     });
 }
 ```
+go to **[Admin Panel Section](#admin-panel)** for next steps
+<br/>
+<br/>
+
+# Admin Panel
+Now make a panel for a filament with artisan command
+```bash
+php artisan make:filament-panel admin
+```
+
+make sure your **AdminPanelProvider.php** has registered on ``bootstrap/provider``. Open your **AdminPanelProvider.php**  and add this code.
+```php
+->discoverClusters(in: app_path('Filament/Clusters'), for: 'App\\Filament\\Clusters');
+```
+
+before you run the terminal, you've to run this command
+```bash
+php artisan filament:optimize-clear
+
+php artisan filament:optimize
+
+php artisan filament:upgrade
+```
+
+**if you not run this command, Js and CSS filament cant reload the sources.**<br/>
+ now you can run the terminal
+ ```bash
+ php artisan serve
+ ```
+<br/>
+<br/>
 
 # Policies File
 for getting policies file run this command:
 ```bash
 php artisan vendor:publish --tag="policies"
 ```
+<br/>
+<br/>
 
 # Cluster File
 for getting Filament Cluster file run this command:
 ```bash
 php artisan vendor:publish --tag="filament-cluster"
 ```
+<br/>
+<br/>
 
 # Testing Package
 this is example file of **ExampleTest.php**
@@ -203,6 +251,8 @@ for testing package you can run
 ```bash
 vendor/bin/phpunit nameOfTestFile.php
 ```
+<br/>
+<br/>
 
 ## getEnvirontmentSetUp()
 Method getEnvirontmentSetUp() actually use for configure app before running the test. this actually use for set config app, load migration or something else.
@@ -306,6 +356,8 @@ class Example extends Model
     protected $fillable = ['name'];
 }
 ```
+<br/>
+<br/>
 
 ## Testing Variable
 you can use this for test variable on your package
@@ -338,5 +390,4 @@ class EnvVariableTest extends TestCase
         $this->assertEquals(['admin', 'user'], $a);
     }
 }
-
 ```
